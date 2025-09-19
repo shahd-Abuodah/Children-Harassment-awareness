@@ -551,3 +551,66 @@
 }
 
 
+
+/* Studies & Awareness Section */
+.studies-section {
+    margin: 30px 0;
+}
+
+.studies-card {
+     background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.studies-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.studies-icon {
+    font-size: 2.5rem;
+}
+
+.studies-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #c2185b;
+}
+
+.studies-header .subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 5px;
+}
+
+.studies-content p {
+    margin: 15px 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+}
+
+.studies-content h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #c2185b;
+}
+
+.studies-content ul, .studies-content ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.studies-content li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+.accordion-btn[style] {
+  border: none;
+}
