@@ -1,0 +1,572 @@
+/* Chatbot Page Specific Styles */
+
+.back-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #4a5568;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.back-button:hover {
+    background: #4a5568;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Introduction Section */
+.intro-section {
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.intro-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.intro-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.intro-card h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 15px;
+}
+
+.intro-card p {
+    font-size: 1.3rem;
+    color: #4a5568;
+    line-height: 1.8;
+}
+
+/* Chat Section */
+.chat-section {
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.chat-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Header */
+.chat-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bot-avatar {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.bot-info {
+    flex: 1;
+}
+
+.bot-info h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.status {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.status.online::before {
+    content: "🟢 ";
+}
+
+.chat-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Chat Messages */
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f7fafc;
+}
+
+.message {
+    display: flex;
+    gap: 12px;
+    max-width: 80%;
+    animation: messageSlideIn 0.3s ease-out;
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.bot-message .message-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(135deg, #4299e1 0%, #63b3ed 100%);
+    color: white;
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message-text {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2d3748;
+    position: relative;
+}
+
+.bot-message .message-text {
+    border-bottom-left-radius: 5px;
+}
+
+.user-message .message-text {
+    background: linear-gradient(135deg, #4299e1 0%, #63b3ed 100%);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.user-message .message-time {
+    text-align: left;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Quick Suggestions */
+.quick-suggestions {
+    padding: 20px;
+    background: #edf2f7;
+    border-top: 1px solid #e2e8f0;
+}
+
+.suggestions-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.suggestions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suggestion-btn {
+    background: white;
+    border: 2px solid #e2e8f0;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 100%;
+    text-align: right;
+}
+
+.suggestion-btn:hover {
+    border-color: #4299e1;
+    background: #ebf8ff;
+    color: #2b6cb0;
+    transform: translateY(-2px);
+}
+
+/* Chat Input */
+.chat-input-container {
+    padding: 20px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #f7fafc;
+    border-radius: 25px;
+    padding: 5px;
+    border: 2px solid #e2e8f0;
+    transition: border-color 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: #4299e1;
+}
+
+#userInput {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #2d3748;
+    outline: none;
+    font-family: 'Tajawal', Arial, sans-serif;
+}
+
+#userInput::placeholder {
+    color: #a0aec0;
+}
+
+#sendButton {
+    background: #4299e1;
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+#sendButton:hover:not(:disabled) {
+    background: #3182ce;
+    transform: scale(1.05);
+}
+
+#sendButton:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.input-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.char-count {
+    font-weight: 500;
+}
+
+.typing-indicator {
+    color: #4299e1;
+    font-style: italic;
+    animation: pulse 1.5s infinite;
+}
+
+/* Loading Animation */
+.loading-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loading-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.loading-dot {
+    width: 8px;
+    height: 8px;
+    background: #4299e1;
+    border-radius: 50%;
+    animation: loadingBounce 1.4s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+/* Notice Section */
+.notice-section {
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.notice-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 5px solid #f6ad55;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.notice-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.notice-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.notice-content p {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Emergency Section */
+.emergency-section {
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.emergency-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 5px solid #e53e3e;
+}
+
+.emergency-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.emergency-card h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 15px;
+}
+
+.emergency-card .phone-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #e53e3e;
+    margin-bottom: 15px;
+    direction: ltr;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.emergency-card .phone-number:hover {
+    transform: scale(1.05);
+    text-shadow: 2px 2px 4px rgba(229, 62, 62, 0.3);
+}
+
+.emergency-card p {
+    color: #718096;
+    font-size: 1.1rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loadingBounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        height: 500px;
+    }
+    
+    .chat-header {
+        padding: 15px;
+    }
+    
+    .bot-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .suggestions-list {
+        flex-direction: column;
+    }
+    
+    .suggestion-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .notice-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .intro-card,
+    .notice-card,
+    .emergency-card {
+        padding: 25px;
+    }
+    
+    .intro-card h2 {
+        font-size: 2rem;
+    }
+    
+    .emergency-card .phone-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container {
+        height: 450px;
+    }
+    
+    .chat-messages {
+        padding: 15px;
+    }
+    
+    .quick-suggestions {
+        padding: 15px;
+    }
+    
+    .chat-input-container {
+        padding: 15px;
+    }
+    
+    .message-text {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+}
+

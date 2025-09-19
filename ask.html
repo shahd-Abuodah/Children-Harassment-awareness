@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسأل - حدث طفلك</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/chatbot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="site-title">اسأل</h1>
+                <div class="subtitle">تحدث مع مساعد ذكي للحصول على إرشادات فورية</div>
+                <a href="index.html" class="back-button">← العودة للرئيسية</a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Introduction Section -->
+            <section class="intro-section">
+                <div class="intro-card">
+                    <div class="intro-icon">🤖</div>
+                    <h2>مساعد ذكي للإرشاد والدعم</h2>
+                    <p>اطرح أسئلتك واحصل على إرشادات فورية حول كيفية التعامل مع المواقف الحساسة</p>
+                </div>
+            </section>
+
+            <!-- Chat Interface -->
+            <section class="chat-section">
+                <div class="chat-container">
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <div class="bot-avatar">🤖</div>
+                        <div class="bot-info">
+                            <h3>مساعد حماية الأطفال</h3>
+                            <span class="status online">متصل</span>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="action-btn" onclick="clearChat()" title="مسح المحادثة">🗑️</button>
+                            <button class="action-btn" onclick="exportChat()" title="تصدير المحادثة">📄</button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div class="chat-messages" id="chat">
+                        <div class="message bot-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-text">
+                                    مرحباً! أنا مساعدك الذكي لحماية الأطفال. يمكنني مساعدتك في:
+                                    <br><br>
+                                    • الإجابة على أسئلة حول سلامة الأطفال
+                                    <br>
+                                    • تقديم نصائح للتعامل مع المواقف الحساسة
+                                    <br>
+                                    • إرشادك لطلب المساعدة المناسبة
+                                    <br><br>
+                                    كيف يمكنني مساعدتك اليوم؟
+                                </div>
+                                <div class="message-time">الآن</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Suggestions -->
+                    <div class="quick-suggestions" id="quickSuggestions">
+                        <div class="suggestions-title">أسئلة شائعة:</div>
+                        <div class="suggestions-list">
+                            <button class="suggestion-btn" onclick="sendQuickMessage('كيف أتحدث مع طفلي عن سلامة الجسم؟')">
+                                كيف أتحدث مع طفلي عن سلامة الجسم؟
+                            </button>
+                            <button class="suggestion-btn" onclick="sendQuickMessage('ما هي العلامات التي تدل على تعرض الطفل للتحرش؟')">
+                                ما هي العلامات التي تدل على تعرض الطفل للتحرش؟
+                            </button>
+                            <button class="suggestion-btn" onclick="sendQuickMessage('كيف أتعامل إذا أخبرني طفلي بحادثة مؤذية؟')">
+                                كيف أتعامل إذا أخبرني طفلي بحادثة مؤذية؟
+                            </button>
+                            <button class="suggestion-btn" onclick="sendQuickMessage('متى يجب أن أطلب المساعدة المهنية؟')">
+                                متى يجب أن أطلب المساعدة المهنية؟
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="chat-input-container">
+                        <div class="input-wrapper">
+                            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." maxlength="500">
+                            <button id="sendButton" onclick="sendMessage()" disabled>
+                                <span class="send-icon">📤</span>
+                            </button>
+                        </div>
+                        <div class="input-info">
+                            <span class="char-count">0/500</span>
+                            <span class="typing-indicator" id="typingIndicator" style="display: none;">
+                                المساعد يكتب...
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Important Notice -->
+            <section class="notice-section">
+                <div class="notice-card">
+                    <div class="notice-icon">⚠️</div>
+                    <div class="notice-content">
+                        <h3>تنبيه مهم</h3>
+                        <p>
+                            هذا المساعد الذكي يقدم إرشادات عامة فقط ولا يغني عن الاستشارة المهنية. 
+                            في حالات الطوارئ أو الشك في وجود خطر فوري، يرجى الاتصال بخط المساعدة أو الجهات المختصة.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Contact -->
+            <section class="emergency-section">
+                <div class="emergency-card">
+                    <div class="emergency-icon">📞</div>
+                    <h3>للمساعدة الفورية</h3>
+                    <div class="phone-number">1800 900 700</div>
+                    <p>خط مساعدة مجاني متاح 24/7 للاستشارات العاجلة</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+</body>
+</html>
+
