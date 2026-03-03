@@ -1,0 +1,10 @@
+# Local secrets — never commit real API keys
+assets/js/config.js
+
+# Dependencies
+node_modules/
+assets/js/node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

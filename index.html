@@ -6,17 +6,25 @@
     <title>حدث طفلك - موقع توعوي لحماية الأطفال</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" href="./assets/images/safety-icon.png" sizes="256x256">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+        <button id="scrollTopBtn" title="العودة لأعلى الصفحة">🔺</button>
     <div class="container">
         <!-- Header Section -->
         <header class="header">
             <div class="logo-section">
-                <h1 class="site-title">حدّث طفلك</h1>
-                <div class="subtitle">موقع توعوي لحماية الأطفال</div>
+                <h1 class="site-title" data-i18n="siteTitle">حدّث طفلك</h1>
+                <div class="subtitle" data-i18n="subtitle">موقع توعوي لحماية الأطفال</div>
             </div>
         </header>
+
+        <!-- Language toggle fixed on left -->
+        <div id="langToggle" style="position:fixed; left:16px; top:16px; z-index:9999; display:flex; gap:8px;">
+            <button id="langAr" aria-label="Arabic" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">ع</button>
+            <button id="langEn" aria-label="English" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">EN</button>
+        </div>
 
         <!-- Main Content -->
          
@@ -24,9 +32,9 @@
             <!-- Awareness Message -->
             <section class="awareness-section">
                 <div class="awareness-card">
-                    <img src="assets/images/safety-icon.png" alt="أيقونة الأمان" class="awareness-image">
-                    <h2 class="awareness-title">توعية ممتازة</h2>
-                    <p class="awareness-text">
+                    <img src="assets/images/safety-icon2.png" alt="أيقونة الأمان" class="awareness-image">
+                    <h2 class="awareness-title" data-i18n="awarenessTitle">توعية ممتازة</h2>
+                    <p class="awareness-text" data-i18n="awarenessText">
                         نساعد العائلات على اكتساب الوعي الكافي حول كيفية التعامل مع المواقف الحساسة 
                         التي قد يتعرض لها أطفالهم، مثل المضايقة أو التحرش أو التنمر.
                     </p>
@@ -38,26 +46,32 @@
                 <div class="buttons-grid">
                     <a href="wrong-touch.html" class="nav-button wrong-touch">
                         <div class="button-icon">⚠️</div>
-                        <h3>لمسة خاطئة</h3>
-                        <p>تعليم الطفل التمييز بين اللمسات الآمنة وغير الآمنة</p>
+                        <h3 data-i18n="nav_wrong_title">لمسة خاطئة</h3>
+                        <p data-i18n="nav_wrong_text">تعليم الطفل التمييز بين اللمسات الآمنة وغير الآمنة</p>
                     </a>
 
                     <a href="if-child-asks.html" class="nav-button child-asks">
                         <div class="button-icon">❓</div>
-                        <h3>لو طفلك سألك</h3>
-                        <p>أسئلة وأجوبة للتعامل مع استفسارات الأطفال</p>
+                        <h3 data-i18n="nav_asks_title">لو طفلك سألك</h3>
+                        <p data-i18n="nav_asks_text">أسئلة وأجوبة للتعامل مع استفسارات الأطفال</p>
                     </a>
 
                     <a href="educate.html" class="nav-button educate">
                         <div class="button-icon">📚</div>
-                        <h3>تثقف</h3>
-                        <p>العلامات التي قد تشير إلى وجود تحرش أو مضايقة</p>
+                        <h3 data-i18n="nav_educate_title">تثقف</h3>
+                        <p data-i18n="nav_educate_text">العلامات التي قد تشير إلى وجود تحرش أو مضايقة</p>
                     </a>
 
                     <a href="ask.html" class="nav-button ask">
                         <div class="button-icon">💬</div>
-                        <h3>اسأل</h3>
-                        <p>تحدث مع مساعد ذكي للحصول على إرشادات فورية</p>
+                        <h3 data-i18n="nav_ask_title">اسأل</h3>
+                        <p data-i18n="nav_ask_text">تحدث مع مساعد ذكي للحصول على إرشادات فورية</p>
+                    </a>
+
+                    <a href="draw.html" class="nav-button draw">
+                        <div class="button-icon">🎨</div>
+                        <h3 data-i18n="nav_draw_title">لوحة الرسم</h3>
+                        <p data-i18n="nav_draw_text">ارسم مشاعرك وتحدث عنها بأمان</p>
                     </a>
                 </div>
             </section>
@@ -68,13 +82,24 @@
             <div class="contact-section">
                 <div class="contact-card">
                     <div class="contact-icon">📞</div>
-                    <h3>تواصل مع مختص</h3>
-                    <div class="phone-number">1800 900 700</div>
-                    <p>خط مساعدة مجاني متاح 24/7</p>
+                    <h3 data-i18n="contactTitle"> في حالات الطوارى يمكن الاتصال على خط شباك الشباب </h3>
+                    <div class="phone-number" data-i18n="phoneNumber">1800 900 700</div>
+                    <p data-i18n="contactText"> خط مساعدة مجاني بإشراف أخصائيات متاح للاستشارات العاجلة
+يومياً من ٨ صباحاً حتى ٧ مساءً. </p>
                 </div>
             </div>
         </footer>
+        <!-- Credits: bilingual (Arabic / English) -->
+        <div class="credits" style="text-align:center; color:#666; font-size:0.95rem; margin:18px 0 30px;">
+            <div id="creditsAr" lang="ar" style="display:block">
+                تنفيذ هذا المشروع تم بجهود أصدقاء "المساحة الآمنة صديقة الشباب" من طلبة جامعة بيرزيت — شهد أبو عودة، عبد الرحمن صرمة، عبد الله المسالمة، بيسان الأحمد، أمين سجدية.
+            </div>
+            <div id="creditsEn" lang="en" style="display:none">
+                This project was implemented thanks to the efforts of friends from the "Youth FriendlySafe Space — Birzeit University students: Shahd Abu Oda, Abdul Rahman Sarmeh, Abdullah Al-Masalma, Bisan Al-Ahmad, Ameen Sajdyah.
+            </div>
+        </div>
     </div>
+
 
     <script src="assets/js/main.js"></script>
 </body>

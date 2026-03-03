@@ -6,16 +6,26 @@
     <title>لمسة خاطئة - حدث طفلك</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/wrong-touch.css">
+    <link rel="icon" type="image/png" href="./assets/images/safety-icon.png" sizes="32x32">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <button id="scrollTopBtn" title="العودة لأعلى الصفحة">🔺</button>
+
+    <!-- Language toggle fixed on left -->
+    <div id="langToggle" style="position:fixed; left:16px; top:16px; z-index:9999; display:flex; gap:8px;">
+        <button id="langAr" aria-label="Arabic" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">ع</button>
+        <button id="langEn" aria-label="English" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">EN</button>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
             <div class="logo-section">
-                <h1 class="site-title">لمسة خاطئة</h1>
-                <div class="subtitle">تعليم الطفل التمييز بين اللمسات الآمنة وغير الآمنة</div>
-                <a href="index.html" class="back-button">← العودة للرئيسية</a>
+                <h1 class="site-title" data-i18n="wt_title">لمسة خاطئة</h1>
+                <div class="subtitle" data-i18n="wt_subtitle">تعليم الطفل التمييز بين اللمسات الآمنة وغير الآمنة</div>
+                <a href="index.html" class="back-button" data-i18n="back_home">← العودة للرئيسية</a>
             </div>
         </header>
 
@@ -24,18 +34,18 @@
             <!-- Gender Selection Section -->
             <section class="gender-selection" id="genderSelection">
                 <div class="selection-card">
-                    <h2>اختر جنس الطفل</h2>
-                    <p>اختر الشخصية المناسبة لتعليم طفلك</p>
-                    
+                    <h2 data-i18n="wt_selectGenderTitle">اختر جنس الطفل</h2>
+                    <p data-i18n="wt_selectGenderText">اختر الشخصية المناسبة لتعليم طفلك</p>
+
                     <div class="gender-buttons">
                         <button class="gender-btn" data-gender="girl" onclick="selectGender('girl')">
                             <img src="assets/images/cartoon-girl.png" alt="بنت" class="gender-image">
-                            <span>بنت</span>
+                            <span data-i18n="wt_girl">بنت</span>
                         </button>
-                        
+
                         <button class="gender-btn" data-gender="boy" onclick="selectGender('boy')">
                             <img src="assets/images/cartoon-boy.png" alt="ولد" class="gender-image">
-                            <span>ولد</span>
+                            <span data-i18n="wt_boy">ولد</span>
                         </button>
                     </div>
                 </div>
@@ -64,6 +74,10 @@
                                 <div class="highlight-circle"></div>
                             </div>
                             
+                            <div class="body-part chest-area" data-part="chest" onclick="showBodyPartInfo('chest')">
+                                <div class="highlight-circle"></div>
+                            </div>
+                            
                             <div class="body-part leg-area" data-part="leg" onclick="showBodyPartInfo('leg')">
                                 <div class="highlight-circle"></div>
                             </div>
@@ -71,48 +85,58 @@
                     </div>
 
                     <!-- Body Parts Buttons -->
-                    <div class="body-parts-grid">
-                        <button class="body-part-btn" data-part="mouth" onclick="showBodyPartInfo('mouth')">
-                            <div class="part-icon">👄</div>
-                            <span>الفم</span>
-                        </button>
-                        
+                    <div class="body-parts-grid" id="parts_section">
+
+                    <button class="body-part-btn" data-part="mouth" onclick="showBodyPartInfo('mouth')">
+                        <div class="part-icon">👄</div>
+                        <span data-i18n="wt_part_mouth">الفم</span>
+                    </button>
+
+
                         <button class="body-part-btn" data-part="hand" onclick="showBodyPartInfo('hand')">
                             <div class="part-icon">✋</div>
-                            <span>اليد</span>
+                            <span data-i18n="wt_part_hand">اليد</span>
                         </button>
-                        
+
                         <button class="body-part-btn" data-part="private" onclick="showBodyPartInfo('private')">
                             <div class="part-icon">⚠️</div>
-                            <span>المنطقة الخاصة</span>
+                            <span data-i18n="wt_part_private">المنطقة الخاصة</span>
                         </button>
-                        
+
+                        <button class="body-part-btn" data-part="chest" onclick="showBodyPartInfo('chest')">
+                            <div class="part-icon">💖</div>
+                            <span data-i18n="wt_part_chest">الصدر</span>
+                        </button>
+
                         <button class="body-part-btn" data-part="leg" onclick="showBodyPartInfo('leg')">
                             <div class="part-icon">🦵</div>
-                            <span>الرجل</span>
+                            <span data-i18n="wt_part_leg">الرجل</span>
                         </button>
                     </div>
 
                     <!-- Information Display -->
                     <div class="info-display" id="infoDisplay">
                         <div class="info-content">
-                            <h3 id="infoTitle">اضغط على أي جزء من الجسم لتعلم المزيد</h3>
-                            <p id="infoText">اختر جزءاً من الجسم لتتعلم عنه وعن اللمسات الآمنة وغير الآمنة.</p>
+                            <h3 id="infoTitle" data-i18n="wt_info_default_title">اضغط على أي جزء من الجسم لتعلم المزيد</h3>
+                            <p id="infoText" data-i18n="wt_info_default_text">اختر جزءاً من الجسم لتتعلم عنه وعن اللمسات الآمنة وغير الآمنة.</p>
                             <div class="safety-indicator" id="safetyIndicator"></div>
                         </div>
                     </div>
 
                     <!-- Back to Selection Button -->
-                    <button class="change-gender-btn" onclick="backToGenderSelection()">
+                    <button class="change-gender-btn" onclick="backToGenderSelection()" data-i18n="wt_changeCharacter">
                         تغيير الشخصية
                     </button>
                 </div>
             </section>
         </main>
     </div>
+     
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/wrong-touch.js"></script>
+   
+
 </body>
 </html>
 

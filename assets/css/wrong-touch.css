@@ -173,7 +173,7 @@
 
 /* Body Part Positions */
 .mouth-area {
-    top: 25%;
+    top: 27%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -187,6 +187,18 @@
     top: 60%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.chest-area {
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+
+/* Hide chest button by default; shown only for girl */
+.body-part-btn[data-part="chest"] {
+    display: none;
 }
 
 .leg-area {
@@ -365,4 +377,25 @@
         height: 30px;
     }
 }
+.scroll-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    display: none; /* يخفي الزر بالبداية */
+    z-index: 9999;
+    transition: 0.3s ease;
+}
+
+.scroll-top-btn:hover {
+    background-color: #ff3b3b;
+}
+
+
 

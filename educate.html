@@ -6,18 +6,25 @@
     <title>تثقف - حدث طفلك</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/educate.css">
+    <link rel="icon" type="image/png" href="./assets/images/safety-icon.png" >
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Language toggle fixed on left -->
+    <div id="langToggle" style="position:fixed; left:16px; top:16px; z-index:9999; display:flex; gap:8px;">
+        <button id="langAr" aria-label="Arabic" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">ع</button>
+        <button id="langEn" aria-label="English" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">EN</button>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
             <div class="logo-section">
-                <h1 class="site-title">تثقف</h1>
-                <div class="subtitle">
+                <h1 class="site-title" data-i18n="ed_title">تثقف</h1>
+                <div class="subtitle" data-i18n="ed_subtitle">
                 دراسات واحصائيات ،والعلامات التي قد تشير إلى وجود تحرش أو مضايقة.
                 </div>
-                <a href="index.html" class="back-button">← العودة للرئيسية</a>
+                <a href="index.html" class="back-button" data-i18n="back_home">← العودة للرئيسية</a>
             </div>
         </header>
 
@@ -26,14 +33,14 @@
 
   <!-- Awareness & Studies Section -->
 <section class="studies-section">
-    <div class="studies-card">
+    <div class="category-card studies-section">
         <div class="studies-header">
             <div class="studies-icon">📊</div>
-            <h2>دراسات وإحصائيات</h2>
-          
+            <h2 data-i18n="ed_studies_title">دراسات وإحصائيات</h2>
+
         </div>
 
-        <div class="studies-content">
+        <div class="studies-content only-ar">
             <p>من الضروري جداً بناء علاقة قوية وصحية مع أطفالك، فالتواصل الجيد والحوار المفتوح يشكلان خط الدفاع الأول لحمايتهم. إن نقص الوعي لدى الأسر هو من الأسباب الرئيسية لانتشار حوادث الإساءة الجنسية للأطفال. يجب كسر حاجز الخوف ليستطيع الطفل أن يبوح بما يشعر به، مما يمكن الأهل من معالجة أي مشكلة في بدايتها.</p>
 
             <h3>مفاهيم أساسية يجب على الأهل معرفتها</h3>
@@ -46,7 +53,7 @@
             <h3>علامات قد تدل على تعرض الطفل للإساءة</h3>
             <ul>
                 <li>جسدية: صعوبة في المشي أو الجلوس، أمراض متكررة في منطقة الأعضاء التناسلية.</li>
-                <li>سلوكية: الانطواء، كوابيس، الهروب من المدرسة، فقدان الثقة بالنفس.</li>
+                <li>سلوكية: الانطواء، كوابيس، الهروب من المدرسة, فقدان الثقة بالنفس.</li>
                 <li>نفسية: الاكتئاب، سلوكيات استفزازية أو إغرائية.</li>
             </ul>
 
@@ -89,6 +96,63 @@
             <h3>كيف تجيب على أسئلة الأطفال المحرجة؟</h3>
             <p>أجب بصراحة وبساطة، مع مراعاة عمر الطفل وقدرته على الفهم. استخدم كلمات واضحة ومباشرة لتزويده بالمعلومات الصحيحة من مصدر موثوق، وتجنب المصادر الخارجية التي قد تكون خاطئة أو ضارة.</p>
         </div>
+
+        <div class="studies-content only-en" style="display:none;">
+            <p>It is very important to build a strong, healthy relationship with your children. Good communication and open dialogue are the first line of defense to protect them. A lack of awareness among families is one of the main reasons child sexual abuse spreads. The barrier of fear must be broken so the child can express what they feel, allowing parents to address any problem at its outset.</p>
+
+            <h3>Key concepts parents should know</h3>
+            <ul>
+                <li><strong>Sexual abuse:</strong> includes any sexual act committed against a child, whether physical, verbal, or psychological.</li>
+                <li><strong>Sexual harassment:</strong> any unwanted sexual behavior or suggestion.</li>
+                <li><strong>The abuser:</strong> often someone the child knows and trusts, such as a relative or acquaintance.</li>
+            </ul>
+
+            <h3>Signs that may indicate a child has been abused</h3>
+            <ul>
+                <li>Physical: difficulty walking or sitting, recurrent illnesses in the genital area.</li>
+                <li>Behavioral: withdrawal, nightmares, running away from school, loss of self-confidence.</li>
+                <li>Psychological: depression, provocative or seductive behaviors.</li>
+            </ul>
+
+            <h3>How do you protect your children? (Practical steps)</h3>
+            <ol>
+                <li>
+                    <strong>Teach them about their bodies and privacy:</strong>
+                    <ul>
+                        <li>A child's body is their own, and no one is allowed to touch their private parts.</li>
+                        <li>Train them to say "no" and to ask for help immediately when they feel uncomfortable.</li>
+                        <li>Distinguish "good" touches from "bad" touches.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Build trust and open communication:</strong>
+                    <ul>
+                        <li>Stay close to your child and encourage them to talk without fear.</li>
+                        <li>Make them feel safe, and assure them you are their first source of protection.</li>
+                        <li>Always believe your child if they tell you about any worrying situation.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Set clear boundaries:</strong>
+                    <ul>
+                        <li>Don't allow sleeping in one bed or with others without supervision.</li>
+                        <li>No accepting gifts from strangers without your knowledge.</li>
+                        <li>Avoid leaving the child with strangers for long periods without supervision.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Be alert and attentive:</strong>
+                    <ul>
+                        <li>Watch for any sudden changes in the child's behavior.</li>
+                        <li>Check the child's body periodically for any unusual signs.</li>
+                        <li>Pay attention to the relationships of the adults around the child.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>How do you answer children's embarrassing questions?</h3>
+            <p>Answer frankly and simply, taking into account the child's age and ability to understand. Use clear, direct words to give them correct information from a trusted source, and avoid outside sources that may be wrong or harmful.</p>
+        </div>
     </div>
 </section>
 
@@ -96,8 +160,8 @@
             <section class="intro-section">
                 <div class="intro-card">
                     <div class="intro-icon">🔍</div>
-                    <h2>دليل التعرف على العلامات التحذيرية</h2>
-                    <p>معرفة العلامات المبكرة يمكن أن تساعد في حماية طفلك وتوفير المساعدة في الوقت المناسب</p>
+                    <h2 data-i18n="ed_intro_title">دليل التعرف على العلامات التحذيرية</h2>
+                    <p data-i18n="ed_intro_text">معرفة العلامات المبكرة يمكن أن تساعد في حماية طفلك وتوفير المساعدة في الوقت المناسب</p>
                 </div>
             </section>
 
@@ -105,7 +169,7 @@
             <section class="warning-banner">
                 <div class="warning-content">
                     <div class="warning-icon">⚠️</div>
-                    <div class="warning-text">
+                    <div class="warning-text" data-i18n="ed_warning">
                         <strong>تنبيه مهم:</strong> وجود علامة واحدة أو أكثر لا يعني بالضرورة حدوث تحرش، ولكنها تستدعي الانتباه والمتابعة الحذرة.
                     </div>
                 </div>
@@ -118,47 +182,47 @@
                 <div class="category-card physical-signs">
                     <div class="category-header">
                         <div class="category-icon">🩺</div>
-                        <h3 class="category-title">1. علامات جسدية</h3>
+                        <h3 class="category-title" data-i18n="ed_physical_title">1. علامات جسدية</h3>
                     </div>
-                    
+
                     <div class="signs-list">
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>ألم أو حكة في المناطق الحساسة</h4>
-                                <p>ألم أو حكة في منطقة الأعضاء التناسلية أو الشرج دون سبب طبي واضح.</p>
+                                <h4 data-i18n="ed_ph1_h">ألم أو حكة في المناطق الحساسة</h4>
+                                <p data-i18n="ed_ph1_p">ألم أو حكة في منطقة الأعضاء التناسلية أو الشرج دون سبب طبي واضح.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>نزيف أو جروح غير مبررة</h4>
-                                <p>نزيف أو جروح أو كدمات غير مبرَّرة في الأعضاء التناسلية أو الشرج.</p>
+                                <h4 data-i18n="ed_ph2_h">نزيف أو جروح غير مبررة</h4>
+                                <p data-i18n="ed_ph2_p">نزيف أو جروح أو كدمات غير مبرَّرة في الأعضاء التناسلية أو الشرج.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>التهابات متكررة</h4>
-                                <p>التهابات بولية متكرّرة أو التهابات مهبليّة بدون سبب معروف.</p>
+                                <h4 data-i18n="ed_ph3_h">التهابات متكررة</h4>
+                                <p data-i18n="ed_ph3_p">التهابات بولية متكرّرة أو التهابات مهبليّة بدون سبب معروف.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>تغييرات في الأنماط البدنية</h4>
-                                <p>سلس البول أو التبول الليلي بعد أن يكون الطفل متحكمًا عادة.</p>
+                                <h4 data-i18n="ed_ph4_h">تغييرات في الأنماط البدنية</h4>
+                                <p data-i18n="ed_ph4_p">سلس البول أو التبول الليلي بعد أن يكون الطفل متحكمًا عادة.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>بقع على الملابس</h4>
-                                <p>نزول دم على الملابس الداخلية أو بقع ملحوظة عليها.</p>
+                                <h4 data-i18n="ed_ph5_h">بقع على الملابس</h4>
+                                <p data-i18n="ed_ph5_p">نزول دم على الملابس الداخلية أو بقع ملحوظة عليها.</p>
                             </div>
                         </div>
                     </div>
@@ -168,71 +232,71 @@
                 <div class="category-card behavioral-signs">
                     <div class="category-header">
                         <div class="category-icon">🧠</div>
-                        <h3 class="category-title">2. علامات سلوكية / عاطفية</h3>
+                        <h3 class="category-title" data-i18n="ed_behavioral_title">2. علامات سلوكية / عاطفية</h3>
                     </div>
-                    
+
                     <div class="signs-list">
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>تغيّرات مفاجئة في السلوك</h4>
-                                <p>الانعزال، الخجل، الحذر الشديد، أو الخوف من شخص أو مكان معين.</p>
+                                <h4 data-i18n="ed_be1_h">تغيّرات مفاجئة في السلوك</h4>
+                                <p data-i18n="ed_be1_p">الانعزال، الخجل، الحذر الشديد، أو الخوف من شخص أو مكان معين.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>اضطرابات النوم</h4>
-                                <p>كوابيس أو اضطرابات في النوم، رفض النوم بمفرده، خوف من الذهاب إلى السرير.</p>
+                                <h4 data-i18n="ed_be2_h">اضطرابات النوم</h4>
+                                <p data-i18n="ed_be2_p">كوابيس أو اضطرابات في النوم، رفض النوم بمفرده، خوف من الذهاب إلى السرير.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>تدهور الأداء المدرسي</h4>
-                                <p>تدهور في الأداء المدرسي أو الغياب المتكرر عن المدرسة.</p>
+                                <h4 data-i18n="ed_be3_h">تدهور الأداء المدرسي</h4>
+                                <p data-i18n="ed_be3_p">تدهور في الأداء المدرسي أو الغياب المتكرر عن المدرسة.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>معرفة جنسية غير مناسبة</h4>
-                                <p>استخدام كلمات جنسية لا يفهمها عادة الأطفال بهذا السن، أو تمثيل أدوار جنسية في اللعب.</p>
+                                <h4 data-i18n="ed_be4_h">معرفة جنسية غير مناسبة</h4>
+                                <p data-i18n="ed_be4_p">استخدام كلمات جنسية لا يفهمها عادة الأطفال بهذا السن، أو تمثيل أدوار جنسية في اللعب.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>تغيرات في العدوانية</h4>
-                                <p>عدوانية مفاجئة أو سلوك عنيف، أو على العكس فرط الطاعة والخنوع الشديد.</p>
+                                <h4 data-i18n="ed_be5_h">تغيرات في العدوانية</h4>
+                                <p data-i18n="ed_be5_p">عدوانية مفاجئة أو سلوك عنيف، أو على العكس فرط الطاعة والخنوع الشديد.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>تراجع في المهارات</h4>
-                                <p>تراجع في بعض المهارات التي تعلمها الطفل سابقًا مثل الكلام أو اللغة.</p>
+                                <h4 data-i18n="ed_be6_h">تراجع في المهارات</h4>
+                                <p data-i18n="ed_be6_p">تراجع في بعض المهارات التي تعلمها الطفل سابقًا مثل الكلام أو اللغة.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>أعراض جسدية نفسية</h4>
-                                <p>ألم في البطن أو الصداع المتكرر بدون سبب طبي واضح.</p>
+                                <h4 data-i18n="ed_be7_h">أعراض جسدية نفسية</h4>
+                                <p data-i18n="ed_be7_p">ألم في البطن أو الصداع المتكرر بدون سبب طبي واضح.</p>
                             </div>
                         </div>
-                        
+
                         <div class="sign-item">
                             <div class="sign-indicator"></div>
                             <div class="sign-content">
-                                <h4>مشاعر سلبية</h4>
-                                <p>مشاعر الحزن أو الخجل أو الشعور بالذنب، انخفاض الثقة بالنفس.</p>
+                                <h4 data-i18n="ed_be8_h">مشاعر سلبية</h4>
+                                <p data-i18n="ed_be8_p">مشاعر الحزن أو الخجل أو الشعور بالذنب، انخفاض الثقة بالنفس.</p>
                             </div>
                         </div>
                     </div>
@@ -245,39 +309,39 @@
                 <div class="action-card">
                     <div class="action-header">
                         <div class="action-icon">🚨</div>
-                        <h3>ماذا تفعل إذا لاحظت هذه العلامات؟</h3>
+                        <h3 data-i18n="ed_action_title">ماذا تفعل إذا لاحظت هذه العلامات؟</h3>
                     </div>
-                    
+
                     <div class="steps-list">
                         <div class="step-item">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h4>ابق هادئاً</h4>
-                                <p>لا تظهر الذعر أو القلق الشديد أمام الطفل، حافظ على هدوئك وتماسكك.</p>
+                                <h4 data-i18n="ed_ac1_h">ابق هادئاً</h4>
+                                <p data-i18n="ed_ac1_p">لا تظهر الذعر أو القلق الشديد أمام الطفل، حافظ على هدوئك وتماسكك.</p>
                             </div>
                         </div>
-                        
+
                         <div class="step-item">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h4>تحدث مع الطفل</h4>
-                                <p>اختر وقتاً مناسباً وتحدث مع الطفل بلطف وصبر، دون إجباره على الكلام.</p>
+                                <h4 data-i18n="ed_ac2_h">تحدث مع الطفل</h4>
+                                <p data-i18n="ed_ac2_p">اختر وقتاً مناسباً وتحدث مع الطفل بلطف وصبر، دون إجباره على الكلام.</p>
                             </div>
                         </div>
-                        
+
                         <div class="step-item">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h4>استشر مختصاً</h4>
-                                <p>تواصل مع طبيب الأطفال أو مختص نفسي للحصول على التوجيه المناسب.</p>
+                                <h4 data-i18n="ed_ac3_h">استشر مختصاً</h4>
+                                <p data-i18n="ed_ac3_p">تواصل مع طبيب الأطفال أو مختص نفسي للحصول على التوجيه المناسب.</p>
                             </div>
                         </div>
-                        
+
                         <div class="step-item">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h4>وثق الملاحظات</h4>
-                                <p>اكتب ملاحظاتك حول السلوكيات والعلامات التي لاحظتها مع التواريخ.</p>
+                                <h4 data-i18n="ed_ac4_h">وثق الملاحظات</h4>
+                                <p data-i18n="ed_ac4_p">اكتب ملاحظاتك حول السلوكيات والعلامات التي لاحظتها مع التواريخ.</p>
                             </div>
                         </div>
                     </div>
@@ -286,42 +350,42 @@
 
             <!-- Resources Section -->
             <section class="resources-section">
-                <div class="resources-card">
+                <div class="resources-card resources-section">
                     <div class="resources-header">
                         <div class="resources-icon">📚</div>
-                        <h3>مصادر موثوقة لتفاصيل أكثر</h3>
+                        <h3 data-i18n="ed_resources_title">مصادر موثوقة لتفاصيل أكثر</h3>
                     </div>
-                    
+
                     <div class="resources-list">
                         <div class="resource-item">
                             <div class="resource-icon">🏥</div>
                             <div class="resource-content">
                                 <h4>Mayo Clinic</h4>
-                                <p>قسم أعراض وعلامات إساءة الأطفال والتحرش الجنسي</p>
+                                <p data-i18n="ed_res1_p">قسم أعراض وعلامات إساءة الأطفال والتحرش الجنسي</p>
                             </div>
                         </div>
-                        
+
                         <div class="resource-item">
                             <div class="resource-icon">🏛️</div>
                             <div class="resource-content">
                                 <h4>Children's Advocacy Center (CAC Ottawa)</h4>
-                                <p>تحديد العلامات الجسدية والسلوكية</p>
+                                <p data-i18n="ed_res2_p">تحديد العلامات الجسدية والسلوكية</p>
                             </div>
                         </div>
-                        
+
                         <div class="resource-item">
                             <div class="resource-icon">🏥</div>
                             <div class="resource-content">
-                                <h4>NHS (الخدمات الصحية الوطنية في بريطانيا)</h4>
-                                <p>خطوات ما تفعله إذا اشتبهت بالتحرش</p>
+                                <h4 data-i18n="ed_res3_h">NHS (الخدمات الصحية الوطنية في بريطانيا)</h4>
+                                <p data-i18n="ed_res3_p">خطوات ما تفعله إذا اشتبهت بالتحرش</p>
                             </div>
                         </div>
-                        
+
                         <div class="resource-item">
                             <div class="resource-icon">🌟</div>
                             <div class="resource-content">
                                 <h4>Darkness to Light</h4>
-                                <p>تعريف العلامات العاطفية والجسدية، وتحذير من استدراج الطفل</p>
+                                <p data-i18n="ed_res4_p">تعريف العلامات العاطفية والجسدية، وتحذير من استدراج الطفل</p>
                             </div>
                         </div>
                     </div>
@@ -332,17 +396,19 @@
             <section class="emergency-section">
                 <div class="emergency-card">
                     <div class="emergency-icon">📞</div>
-                    <h3>للمساعدة الفورية</h3>
+                    <h3 data-i18n="emergency_help_title">للمساعدة الفورية</h3>
                     <div class="phone-number">1800 900 700</div>
-                    <p>خط مساعدة مجاني متاح 24/7 للاستشارات العاجلة</p>
+                    <p data-i18n="helpline_note_247">خط مساعدة مجاني متاح 24/7 للاستشارات العاجلة</p>
                 </div>
             </section>
 
         </main>
     </div>
+    <button id="scrollTopBtn" title="العودة لأعلى الصفحة">🔺</button>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/educate.js"></script>
+
 </body>
 </html>
 

@@ -1,33 +1,66 @@
 // Wrong Touch Page JavaScript
 
 let selectedGender = null;
+let currentPart = null; // remember the selected part so we can re-render on language change
 
-// Body parts information
+// Current language helper (defined by main.js; fall back to Arabic)
+function wtLang() {
+    return (typeof window.getSiteLang === 'function') ? window.getSiteLang() : 'ar';
+}
+
+// Body parts information (bilingual)
 const bodyPartsInfo = {
     mouth: {
-        title: "الفم",
-        text: "هذا فمي أستخدمه للكلام والأكل والضحك ولا يحق لأحد لمسه وإذا حدا لمسه لازم أخبر بابا وماما",
+        title: { ar: "الفم", en: "Mouth" },
+        text: {
+            ar: "هذا فمي أستخدمه للكلام والأكل والضحك ولا يحق لأحد لمسه وإذا حدا لمسه لازم أخبر بابا وماما",
+            en: "This is my mouth. I use it to talk, eat and laugh. No one is allowed to touch it, and if someone does I must tell my mum and dad."
+        },
         safety: "unsafe",
-        safetyText: "لمسة غير آمنة - أخبر والديك فوراً"
+        safetyText: { ar: "لمسة غير آمنة - أخبر والديك فوراً", en: "Unsafe touch - tell your parents right away" }
     },
     hand: {
-        title: "اليد",
-        text: "هاي إيدي مسموح أستخدمها للعب والسلام وهي لمسة صحيحة",
+        title: { ar: "اليد", en: "Hand" },
+        text: {
+            ar: "هاي إيدي مسموح أستخدمها للعب والسلام وهي لمسة صحيحة",
+            en: "This is my hand. I'm allowed to use it to play and to shake hands - that's a good touch."
+        },
         safety: "safe",
-        safetyText: "لمسة آمنة - مقبولة للعب والسلام"
+        safetyText: { ar: "لمسة آمنة - مقبولة للعب والسلام", en: "Safe touch - okay for playing and shaking hands" }
     },
     private: {
-        title: "المنطقة التناسلية",
-        text: "المنطقة التي تغطيها الملابس الداخلية ممنوع حدا يلمسها أو يشوفها",
+        title: { ar: "المنطقة التناسلية", en: "Private Area" },
+        text: {
+            ar: "المنطقة التي تغطيها الملابس الداخلية ممنوع حدا يلمسها أو يشوفها",
+            en: "The area covered by underwear - no one is allowed to touch it or look at it."
+        },
         safety: "unsafe",
-        safetyText: "منطقة خاصة - ممنوع لمسها أو رؤيتها"
+        safetyText: { ar: "منطقة خاصة - ممنوع لمسها أو رؤيتها", en: "Private area - must not be touched or seen" }
+    },
+    chest: {
+        title: { ar: "الصدر", en: "Chest" },
+        text: {
+            ar: "الصدر منطقة خاصة ويجب عدم لمسها أو النظر إليها بدون إذن. إذا حدث ذلك، أخبر والديك فوراً.",
+            en: "The chest is a private area that must not be touched or looked at without permission. If that happens, tell your parents right away."
+        },
+        safety: "unsafe",
+        safetyText: { ar: "لمسة غير آمنة - أخبر والديك فوراً", en: "Unsafe touch - tell your parents right away" }
     },
     leg: {
-        title: "الرجل",
-        text: "هاي رجلي بستخدمها ألعب وأركض وعادي هي لمسة صحيحة",
+        title: { ar: "الرجل", en: "Leg" },
+        text: {
+            ar: "هاي رجلي بستخدمها ألعب وأركض وعادي هي لمسة صحيحة",
+            en: "This is my leg. I use it to play and run - that's a good touch."
+        },
         safety: "safe",
-        safetyText: "لمسة آمنة - مقبولة للعب والأنشطة"
+        safetyText: { ar: "لمسة آمنة - مقبولة للعب والأنشطة", en: "Safe touch - okay for playing and activities" }
     }
+};
+
+// Education title per gender and language
+const educationTitles = {
+    girl: { ar: 'تعلمي عن جسمك', en: 'Learn About Your Body' },
+    boy: { ar: 'تعلم عن جسمك', en: 'Learn About Your Body' }
 };
 
 // Select gender function
@@ -61,14 +94,25 @@ function showBodyEducation() {
         
         // Set character image based on selected gender
         const characterImage = document.getElementById('characterImage');
+        const lang = wtLang();
         if (selectedGender === 'girl') {
             characterImage.src = 'assets/images/cartoon-girl.png';
-            characterImage.alt = 'شخصية البنت';
-            document.getElementById('educationTitle').textContent = 'تعلمي عن جسمك';
+            characterImage.alt = lang === 'en' ? 'Girl character' : 'شخصية البنت';
+            document.getElementById('educationTitle').textContent = educationTitles.girl[lang];
         } else {
             characterImage.src = 'assets/images/cartoon-boy.png';
-            characterImage.alt = 'شخصية الولد';
-            document.getElementById('educationTitle').textContent = 'تعلم عن جسمك';
+            characterImage.alt = lang === 'en' ? 'Boy character' : 'شخصية الولد';
+            document.getElementById('educationTitle').textContent = educationTitles.boy[lang];
+        }
+        // Show chest area/button only for girl
+        const chestAreas = document.querySelectorAll('.chest-area');
+        const chestButtons = document.querySelectorAll('.body-part-btn[data-part="chest"]');
+        if (selectedGender === 'girl') {
+            chestAreas.forEach(el => el.style.display = 'block');
+            chestButtons.forEach(el => el.style.display = 'inline-flex');
+        } else {
+            chestAreas.forEach(el => el.style.display = 'none');
+            chestButtons.forEach(el => el.style.display = 'none');
         }
         
         // Show body education section
@@ -87,7 +131,9 @@ function showBodyEducation() {
 // Show body part information
 function showBodyPartInfo(part) {
     const info = bodyPartsInfo[part];
-    
+    currentPart = part;
+    const lang = wtLang();
+
     // Update active states
     document.querySelectorAll('.body-part').forEach(bp => {
         bp.classList.remove('active');
@@ -108,18 +154,24 @@ function showBodyPartInfo(part) {
     const infoText = document.getElementById('infoText');
     const safetyIndicator = document.getElementById('safetyIndicator');
     
+    if (info.safety === 'unsafe') {
+    playWrongSound();   // الفم + المنطقة التناسلية
+    } 
+    else {
+    playRightSound();   // اليد + الرجل
+    }
     // Animate content change
     const infoDisplay = document.getElementById('infoDisplay');
     infoDisplay.style.transform = 'scale(0.95)';
     infoDisplay.style.opacity = '0.7';
     
     setTimeout(() => {
-        infoTitle.textContent = info.title;
-        infoText.textContent = info.text;
-        
+        infoTitle.textContent = info.title[lang];
+        infoText.textContent = info.text[lang];
+
         // Update safety indicator
         safetyIndicator.className = `safety-indicator ${info.safety}`;
-        safetyIndicator.textContent = info.safetyText;
+        safetyIndicator.textContent = info.safetyText[lang];
         
         // Animate back
         infoDisplay.style.transform = 'scale(1)';
@@ -134,9 +186,10 @@ function showBodyPartInfo(part) {
         }
         
     }, 150);
-    
-    // Play sound effect (if available)
-    playClickSound();
+
+    const target = document.getElementById('parts_section');
+    if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });}  
 }
 
 // Back to gender selection
@@ -155,8 +208,12 @@ function backToGenderSelection() {
         document.querySelectorAll('.gender-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
-        
+        // Hide chest area/button when leaving body view
+        document.querySelectorAll('.chest-area').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.body-part-btn[data-part="chest"]').forEach(el => el.style.display = 'none');
+
         selectedGender = null;
+        currentPart = null;
         
         // Show gender selection
         genderSection.style.display = 'block';
@@ -172,10 +229,15 @@ function backToGenderSelection() {
 }
 
 // Play click sound (optional)
-function playClickSound() {
+function playWrongSound() {
     // You can add audio feedback here if needed
-    // const audio = new Audio('assets/sounds/click.mp3');
-    // audio.play().catch(e => console.log('Audio play failed:', e));
+    const audio = new Audio('assets/sounds/wrong.mp3');
+    audio.play().catch(e => console.log('Audio play failed:', e));
+}
+function playRightSound() {
+    // You can add audio feedback here if needed
+    const audio = new Audio('assets/sounds/right.mp3');
+    audio.play().catch(e => console.log('Audio play failed:', e));
 }
 
 // Add CSS for shake animation
@@ -188,6 +250,31 @@ shakeStyle.textContent = `
     }
 `;
 document.head.appendChild(shakeStyle);
+
+// Re-render dynamic content when the site language changes
+document.addEventListener('sitelangchange', function (e) {
+    const lang = (e.detail && e.detail.lang) || wtLang();
+
+    // Update the "learn about your body" title if the body view is shown
+    const eduTitle = document.getElementById('educationTitle');
+    if (eduTitle && selectedGender) {
+        eduTitle.textContent = educationTitles[selectedGender][lang];
+    }
+
+    // Re-render the currently selected body part (main.js reset it to the default prompt)
+    if (currentPart) {
+        const info = bodyPartsInfo[currentPart];
+        const infoTitle = document.getElementById('infoTitle');
+        const infoText = document.getElementById('infoText');
+        const safetyIndicator = document.getElementById('safetyIndicator');
+        if (infoTitle) infoTitle.textContent = info.title[lang];
+        if (infoText) infoText.textContent = info.text[lang];
+        if (safetyIndicator) {
+            safetyIndicator.className = `safety-indicator ${info.safety}`;
+            safetyIndicator.textContent = info.safetyText[lang];
+        }
+    }
+});
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
@@ -217,4 +304,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+if (scrollTopBtn) {
+
+    window.addEventListener("scroll", function() {
+        if (window.scrollY > 200) {
+            scrollTopBtn.style.display = "block";
+        } else {
+            scrollTopBtn.style.display = "none";
+        }
+    });
+
+    scrollTopBtn.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
 

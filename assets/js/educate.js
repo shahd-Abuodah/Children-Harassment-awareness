@@ -309,10 +309,11 @@ function addSectionNavigation() {
     const nav = document.createElement('div');
     nav.className = 'floating-nav';
     nav.innerHTML = `
+        <button class="nav-btn" data-target="studies-section" title="دراسات واحصائيات">📊</button>
         <button class="nav-btn" data-target="physical-signs" title="العلامات الجسدية">🩺</button>
         <button class="nav-btn" data-target="behavioral-signs" title="العلامات السلوكية">🧠</button>
         <button class="nav-btn" data-target="action-steps" title="خطوات العمل">🚨</button>
-        <button class="nav-btn" data-target="resources" title="المصادر">📚</button>
+        <button class="nav-btn" data-target="resources-section" title="المصادر">📚</button>
     `;
     
     // Add styles for floating nav
@@ -542,4 +543,22 @@ function showNotification(message, type = 'info') {
         }, 300);
     }, 3000);
 }
+
+// الحصول على الزر
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+// تابع التمرير: يظهر الزر فقط إذا تم النزول أكثر من 200px
+window.addEventListener("scroll", function() {
+    if (window.scrollY > 200) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+});
+
+// عند الضغط على الزر: ترجع لأعلى الصفحة بسلاسة
+scrollTopBtn.addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 

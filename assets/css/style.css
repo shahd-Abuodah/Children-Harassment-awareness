@@ -9,7 +9,7 @@ body {
     font-family: 'Tajawal', Arial, sans-serif;
     line-height: 1.6;
     color: #1a1a1a; /* dark text for contrast */
-    background: linear-gradient(135deg, #4FB7B3 0%, #81D4C8 100%), url('../images/hero-background.png');
+    background: linear-gradient(135deg, #4FB7B3 0%, #81D4C8 100%);
     background-size: cover, contain;
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
@@ -239,3 +239,26 @@ body {
     color: #357F7C;
     font-size: 1rem;
 }
+
+#scrollTopBtn {
+    position: fixed;        /* يبقى عائم على الشاشة */
+    bottom: 20px;           /* 20px من أسفل الصفحة */
+    right: 20px;            /* 20px من يمين الصفحة */
+    display: none;          /* مخفي بالبداية */
+    z-index: 1000;          
+    padding: 12px 16px;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#scrollTopBtn:hover {
+    background-color: #007db34d;
+    transform: translateY(-3px);
+}
+

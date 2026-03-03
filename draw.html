@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الرسم - حدث طفلك</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/draw.css">
+    <link rel="icon" type="image/png" href="./assets/images/safety-icon.png" sizes="256x256">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Language toggle fixed on left -->
+    <div id="langToggle" style="position:fixed; left:16px; top:16px; z-index:9999; display:flex; gap:8px;">
+        <button id="langAr" aria-label="Arabic" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">ع</button>
+        <button id="langEn" aria-label="English" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">EN</button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="site-title" data-i18n="dr_title">لوحة الرسم</h1>
+                <div class="subtitle" data-i18n="dr_subtitle">ارسم مشاعرك وتحدث عنها</div>
+                <a href="index.html" class="back-button" data-i18n="back_home">← العودة للرئيسية</a>
+            </div>
+        </header>
+
+        <main class="main-content draw-main">
+
+            <!-- Activity chooser -->
+            <section class="draw-activities">
+                <h2 class="activities-heading" data-i18n="dr_activities_title">اختر نشاطاً 🎨</h2>
+                <div class="activity-grid">
+                    <button class="activity-card active" data-activity="free">
+                        <span class="activity-emoji">🖍️</span>
+                        <span class="activity-name" data-i18n="dr_free_title">رسم حر</span>
+                        <span class="activity-desc" data-i18n="dr_free_text">ارسم أي شيء تحبه</span>
+                    </button>
+                    <button class="activity-card" data-activity="trusted">
+                        <span class="activity-emoji">🤝</span>
+                        <span class="activity-name" data-i18n="dr_trusted_title">الكبار الموثوقون</span>
+                        <span class="activity-desc" data-i18n="dr_trusted_text">ارسم من تشعر بالأمان معهم</span>
+                    </button>
+                    <button class="activity-card" data-activity="body">
+                        <span class="activity-emoji">🧍</span>
+                        <span class="activity-name" data-i18n="dr_body_title">أمان الجسم</span>
+                        <span class="activity-desc" data-i18n="dr_body_text">جسمك لك أنت</span>
+                    </button>
+                    <button class="activity-card" data-activity="safe">
+                        <span class="activity-emoji">🛡️</span>
+                        <span class="activity-name" data-i18n="dr_safe_title">آمن أو غير آمن</span>
+                        <span class="activity-desc" data-i18n="dr_safe_text">ارسم شعوراً بالأمان</span>
+                    </button>
+                    <button class="activity-card" data-activity="help">
+                        <span class="activity-emoji">🆘</span>
+                        <span class="activity-name" data-i18n="dr_help_title">اطلب المساعدة</span>
+                        <span class="activity-desc" data-i18n="dr_help_text">ارسم كيف تطلب المساعدة</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Prompt banner (filled by JS per activity) -->
+            <div class="prompt-banner" id="promptBanner"></div>
+
+            <!-- Drawing area -->
+            <section class="draw-stage">
+                <div class="toolbar">
+                    <div class="tool-group">
+                        <span class="tool-label" data-i18n="dr_tool_color">الألوان</span>
+                        <div class="color-palette" id="colorPalette"></div>
+                    </div>
+                    <div class="tool-group">
+                        <span class="tool-label" data-i18n="dr_tool_brush">حجم الفرشاة</span>
+                        <input type="range" id="brushSize" min="2" max="40" value="8">
+                    </div>
+                    <div class="tool-group tool-buttons">
+                        <button class="tool-btn" id="eraserBtn" data-i18n-title="dr_tool_eraser" title="ممحاة">🧽</button>
+                        <button class="tool-btn" id="undoBtn" data-i18n-title="dr_tool_undo" title="تراجع">↩️</button>
+                        <button class="tool-btn" id="clearBtn" data-i18n-title="dr_tool_clear" title="مسح الكل">🗑️</button>
+                        <button class="tool-btn" id="saveBtn" data-i18n-title="dr_tool_save" title="حفظ الرسمة">💾</button>
+                    </div>
+                </div>
+
+                <div class="canvas-wrapper">
+                    <canvas id="drawCanvas"></canvas>
+                </div>
+
+                <button class="done-btn" id="doneBtn" data-i18n="dr_done">✅ خلّصت! خلّينا نحكي عن رسمتي</button>
+                <p class="privacy-note" data-i18n="dr_privacy_note">🔒 رسوماتك وكلامك خاصة بك ومحفوظة على جهازك فقط.</p>
+            </section>
+
+            <!-- Talk / describe panel -->
+            <section class="talk-panel" id="talkPanel" style="display:none;">
+                <h2 class="talk-title" data-i18n="dr_talk_title">أخبرني عن رسمتك 💛</h2>
+
+                <div class="feelings-row">
+                    <span class="feeling-q" data-i18n="dr_feeling_q">كيف تشعر اليوم؟</span>
+                    <div class="feeling-buttons" id="feelingButtons"></div>
+                </div>
+
+                <div class="talk-messages" id="talkMessages"></div>
+
+                <div class="talk-input-row">
+                    <input type="text" id="talkInput" data-i18n-ph="dr_input_ph" placeholder="اكتب هنا عن رسمتك...">
+                    <button id="talkSend" data-i18n="dr_send">إرسال</button>
+                </div>
+
+                <button class="reset-btn" id="resetBtn" data-i18n="dr_reset">ابدأ رسمة جديدة</button>
+            </section>
+
+            <!-- Parents' corner -->
+            <section class="parents-corner">
+                <button class="parents-toggle" id="parentsToggle" data-i18n="dr_parents_btn">👨‍👩‍👧 ركن الوالدين</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Parents summary modal -->
+    <div class="parents-modal" id="parentsModal" style="display:none;">
+        <div class="parents-modal-overlay" id="parentsOverlay"></div>
+        <div class="parents-modal-card">
+            <button class="parents-close" id="parentsClose" data-i18n-title="dr_close" title="إغلاق">×</button>
+            <h2 data-i18n="dr_parents_title">ملخص داعم للوالدين</h2>
+            <p class="parents-intro" data-i18n="dr_parents_intro"></p>
+
+            <h3 data-i18n="dr_parents_patterns">أنماط قد تلاحظها</h3>
+            <div id="parentsPatterns"></div>
+
+            <h3 data-i18n="dr_parents_starters">أفكار لبدء الحديث</h3>
+            <ul id="parentsStarters"></ul>
+
+            <p class="parents-disclaimer" data-i18n="dr_parents_disclaimer"></p>
+        </div>
+    </div>
+
+    <button id="scrollTopBtn" title="العودة لأعلى الصفحة">🔺</button>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/draw.js"></script>
+</body>
+</html>

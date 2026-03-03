@@ -295,6 +295,24 @@ function addPrintFunctionality() {
     document.body.appendChild(printButton);
 }
 
+// الحصول على الزر
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+// تابع التمرير: يظهر الزر فقط إذا تم النزول أكثر من 200px
+window.addEventListener("scroll", function() {
+    if (window.scrollY > 200) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+});
+
+// عند الضغط على الزر: ترجع لأعلى الصفحة بسلاسة
+scrollTopBtn.addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+
 // Initialize print functionality
 addPrintFunctionality();
 

@@ -1,12 +1,50 @@
 // Chatbot JavaScript with Gemini API Integration
 
 // API Configuration
-const API_KEY = "AIzaSyCtM2eEQQFdNxojfoBHDf4TTlgovfpkwXU";
-const MODEL = "gemini-1.5-flash";
+// The key/model live in assets/js/config.js, which is git-ignored so the secret
+// never gets committed. Copy config.example.js -> config.js and paste your key.
+// Get a key at https://aistudio.google.com/apikey
+const API_KEY = window.GEMINI_API_KEY || "PASTE_YOUR_NEW_GEMINI_API_KEY_HERE";
+const MODEL = window.GEMINI_MODEL || "gemini-2.0-flash";
 
 // Chat state
 let chatHistory = [];
 let isTyping = false;
+
+// Current language helper (defined by main.js; fall back to Arabic)
+function cbLang() {
+    return (typeof window.getSiteLang === 'function') ? window.getSiteLang() : 'ar';
+}
+
+// UI strings for dynamically generated chat content
+const chatStrings = {
+    typing: { ar: 'المساعد يكتب', en: 'The assistant is typing' },
+    clearConfirm: { ar: 'هل أنت متأكد من أنك تريد مسح المحادثة؟', en: 'Are you sure you want to clear the conversation?' },
+    calling: { ar: 'جاري الاتصال بخط المساعدة...', en: 'Calling the helpline...' },
+    cleared: { ar: 'تم مسح المحادثة', en: 'Conversation cleared' },
+    noMessages: { ar: 'لا توجد رسائل لتصديرها', en: 'There are no messages to export' },
+    exported: { ar: 'تم تصدير المحادثة بنجاح', en: 'Conversation exported successfully' },
+    fallback: {
+        ar: `عذراً، حدث خطأ في الاتصال. يمكنك:
+
+• المحاولة مرة أخرى
+• الاتصال بخط المساعدة: 1800 900 700
+• تصفح الأقسام الأخرى في الموقع للحصول على معلومات مفيدة
+
+أنا هنا لمساعدتك عندما تكون الخدمة متاحة.`,
+        en: `Sorry, a connection error occurred. You can:
+
+• Try again
+• Call the helpline: 1800 900 700
+• Browse the other sections of the site for useful information
+
+I'm here to help you when the service is available.`
+    }
+};
+function cbStr(key) {
+    const s = chatStrings[key];
+    return s ? (s[cbLang()] || s.ar) : '';
+}
 
 // Initialize chatbot
 document.addEventListener('DOMContentLoaded', function() {
@@ -63,10 +101,10 @@ function setupEventListeners() {
     if (phoneNumber) {
         phoneNumber.addEventListener('click', function() {
             window.location.href = 'tel:1800900700';
-            showNotification('جاري الاتصال بخط المساعدة...', 'success');
+            showNotification(cbStr('calling'), 'success');
         });
     }
-    
+
     // Auto-scroll chat messages
     const chatMessages = document.getElementById('chat');
     const observer = new MutationObserver(() => {
@@ -99,8 +137,25 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        // Prepare context for child safety
-        const contextPrompt = `أنت مساعد ذكي متخصص في حماية الأطفال وسلامتهم. مهمتك هي:
+        // Prepare context for child safety (in the user's selected language)
+        const contextPrompt = cbLang() === 'en'
+            ? `You are a smart assistant specialized in child protection and safety. Your role is to:
+
+1. Provide advice and guidance on protecting children from abuse and harassment
+2. Help parents deal with sensitive situations
+3. Provide information about warning signs
+4. Guide parents to seek professional help when needed
+
+Important rules:
+- Always reply in English
+- Be sensitive and understanding
+- Give practical, clear advice
+- In serious cases, advise calling the helpline: 1800 900 700
+- Do not provide medical or psychological diagnoses
+- Focus on prevention and protection
+
+Question: ${userMessage}`
+            : `أنت مساعد ذكي متخصص في حماية الأطفال وسلامتهم. مهمتك هي:
 
 1. تقديم نصائح وإرشادات حول حماية الأطفال من التحرش والمضايقة
 2. مساعدة الأهل في التعامل مع المواقف الحساسة
@@ -116,6 +171,12 @@ async function sendMessage() {
 - ركز على الوقاية والحماية
 
 السؤال: ${userMessage}`;
+
+        // Guard: remind the developer to configure a real API key
+        if (!API_KEY || API_KEY.indexOf("PASTE_YOUR") === 0) {
+            console.error('Gemini API key is not configured. Get one at https://aistudio.google.com/apikey');
+            throw new Error('Missing API key');
+        }
 
         // Call Gemini API
         const response = await fetch(
@@ -154,8 +215,11 @@ async function sendMessage() {
         );
         
         hideTypingIndicator();
-        
+
         if (!response.ok) {
+            // Surface the real Gemini error (bad key, retired model, quota, etc.)
+            const errBody = await response.text();
+            console.error('Gemini API error', response.status, errBody);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
@@ -181,15 +245,7 @@ async function sendMessage() {
         console.error('Error:', error);
         
         // Fallback response
-        const fallbackResponse = `عذراً، حدث خطأ في الاتصال. يمكنك:
-
-• المحاولة مرة أخرى
-• الاتصال بخط المساعدة: 1800 900 700
-• تصفح الأقسام الأخرى في الموقع للحصول على معلومات مفيدة
-
-أنا هنا لمساعدتك عندما تكون الخدمة متاحة.`;
-        
-        addMessage(fallbackResponse, 'bot');
+        addMessage(cbStr('fallback'), 'bot');
     }
 }
 
@@ -199,7 +255,7 @@ function addMessage(message, sender) {
     const messageDiv = document.createElement("div");
     messageDiv.className = `message ${sender}-message`;
     
-    const currentTime = new Date().toLocaleTimeString('ar-SA', {
+    const currentTime = new Date().toLocaleTimeString(cbLang() === 'en' ? 'en-US' : 'ar-SA', {
         hour: '2-digit',
         minute: '2-digit'
     });
@@ -248,7 +304,7 @@ function showTypingIndicator() {
         <div class="message-avatar">🤖</div>
         <div class="message-content">
             <div class="loading-message">
-                <span>المساعد يكتب</span>
+                <span>${cbStr('typing')}</span>
                 <div class="loading-dots">
                     <div class="loading-dot"></div>
                     <div class="loading-dot"></div>
@@ -271,17 +327,19 @@ function hideTypingIndicator() {
     }
 }
 
-// Send quick message
+// Send quick message. Accepts either a string or the clicked button element,
+// so the suggestion sent matches the currently displayed language.
 function sendQuickMessage(message) {
+    const text = (message && message.nodeType === 1) ? message.textContent.trim() : message;
     const inputBox = document.getElementById("userInput");
-    inputBox.value = message;
+    inputBox.value = text;
     document.getElementById('sendButton').disabled = false;
     sendMessage();
 }
 
 // Clear chat
 function clearChat() {
-    if (confirm('هل أنت متأكد من أنك تريد مسح المحادثة؟')) {
+    if (confirm(cbStr('clearConfirm'))) {
         const chatBox = document.getElementById("chat");
         
         // Keep only the initial bot message
@@ -301,42 +359,43 @@ function clearChat() {
             suggestions.style.display = 'block';
         }
         
-        showNotification('تم مسح المحادثة', 'success');
+        showNotification(cbStr('cleared'), 'success');
     }
 }
 
 // Export chat
 function exportChat() {
     if (chatHistory.length === 0) {
-        showNotification('لا توجد رسائل لتصديرها', 'info');
+        showNotification(cbStr('noMessages'), 'info');
         return;
     }
-    
-    let exportText = 'محادثة مع مساعد حماية الأطفال\n';
+
+    const en = cbLang() === 'en';
+    let exportText = (en ? 'Conversation with the Child Protection Assistant' : 'محادثة مع مساعد حماية الأطفال') + '\n';
     exportText += '=====================================\n\n';
-    
+
     chatHistory.forEach(entry => {
-        const time = new Date(entry.timestamp).toLocaleString('ar-SA');
-        const sender = entry.role === 'user' ? 'أنت' : 'المساعد';
+        const time = new Date(entry.timestamp).toLocaleString(en ? 'en-US' : 'ar-SA');
+        const sender = entry.role === 'user' ? (en ? 'You' : 'أنت') : (en ? 'Assistant' : 'المساعد');
         exportText += `[${time}] ${sender}:\n${entry.message}\n\n`;
     });
-    
+
     exportText += '\n=====================================\n';
-    exportText += 'للمساعدة الفورية: 1800 900 700\n';
-    exportText += 'موقع حدث طفلك - حماية الأطفال';
+    exportText += (en ? 'For immediate help: 1800 900 700' : 'للمساعدة الفورية: 1800 900 700') + '\n';
+    exportText += en ? 'Connect With Your Child - Child Protection' : 'موقع حدث طفلك - حماية الأطفال';
     
     // Create and download file
     const blob = new Blob([exportText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `محادثة-حماية-الأطفال-${new Date().toISOString().split('T')[0]}.txt`;
+    a.download = `${cbLang() === 'en' ? 'child-protection-chat' : 'محادثة-حماية-الأطفال'}-${new Date().toISOString().split('T')[0]}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     
-    showNotification('تم تصدير المحادثة بنجاح', 'success');
+    showNotification(cbStr('exported'), 'success');
 }
 
 // Save chat history to localStorage
@@ -440,6 +499,23 @@ function showNotification(message, type = 'info') {
         }, 300);
     }, 3000);
 }
+
+// الحصول على الزر
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+// تابع التمرير: يظهر الزر فقط إذا تم النزول أكثر من 200px
+window.addEventListener("scroll", function() {
+    if (window.scrollY > 200) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+});
+
+// عند الضغط على الزر: ترجع لأعلى الصفحة بسلاسة
+scrollTopBtn.addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 // Add keyboard shortcuts
 document.addEventListener('keydown', function(e) {

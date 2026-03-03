@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اسأل - حدث طفلك</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" href="./assets/images/safety-icon.png" sizes="256x256">
     <link rel="stylesheet" href="assets/css/chatbot.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Language toggle fixed on left -->
+    <div id="langToggle" style="position:fixed; left:16px; top:16px; z-index:9999; display:flex; gap:8px;">
+        <button id="langAr" aria-label="Arabic" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">ع</button>
+        <button id="langEn" aria-label="English" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; display:none;">EN</button>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
             <div class="logo-section">
-                <h1 class="site-title">اسأل</h1>
-                <div class="subtitle">تحدث مع مساعد ذكي للحصول على إرشادات فورية</div>
-                <a href="index.html" class="back-button">← العودة للرئيسية</a>
+                <h1 class="site-title" data-i18n="ask_title">اسأل</h1>
+                <div class="subtitle" data-i18n="ask_subtitle">تحدث مع مساعد ذكي للحصول على إرشادات فورية</div>
+                <a href="index.html" class="back-button" data-i18n="back_home">← العودة للرئيسية</a>
             </div>
         </header>
 
@@ -25,8 +32,8 @@
             <section class="intro-section">
                 <div class="intro-card">
                     <div class="intro-icon">🤖</div>
-                    <h2>مساعد ذكي للإرشاد والدعم</h2>
-                    <p>اطرح أسئلتك واحصل على إرشادات فورية حول كيفية التعامل مع المواقف الحساسة</p>
+                    <h2 data-i18n="ask_intro_title">مساعد ذكي للإرشاد والدعم</h2>
+                    <p data-i18n="ask_intro_text">اطرح أسئلتك واحصل على إرشادات فورية حول كيفية التعامل مع المواقف الحساسة</p>
                 </div>
             </section>
 
@@ -37,8 +44,8 @@
                     <div class="chat-header">
                         <div class="bot-avatar">🤖</div>
                         <div class="bot-info">
-                            <h3>مساعد حماية الأطفال</h3>
-                            <span class="status online">متصل</span>
+                            <h3 data-i18n="ask_bot_name">مساعد حماية الأطفال</h3>
+                            <span class="status online" data-i18n="ask_status_online">متصل</span>
                         </div>
                         <div class="chat-actions">
                             <button class="action-btn" onclick="clearChat()" title="مسح المحادثة">🗑️</button>
@@ -51,7 +58,7 @@
                         <div class="message bot-message">
                             <div class="message-avatar">🤖</div>
                             <div class="message-content">
-                                <div class="message-text">
+                                <div class="message-text" data-i18n="ask_welcome">
                                     مرحباً! أنا مساعدك الذكي لحماية الأطفال. يمكنني مساعدتك في:
                                     <br><br>
                                     • الإجابة على أسئلة حول سلامة الأطفال
@@ -62,25 +69,25 @@
                                     <br><br>
                                     كيف يمكنني مساعدتك اليوم؟
                                 </div>
-                                <div class="message-time">الآن</div>
+                                <div class="message-time" data-i18n="ask_now">الآن</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Quick Suggestions -->
                     <div class="quick-suggestions" id="quickSuggestions">
-                        <div class="suggestions-title">أسئلة شائعة:</div>
+                        <div class="suggestions-title" data-i18n="ask_suggestions_title">أسئلة شائعة:</div>
                         <div class="suggestions-list">
-                            <button class="suggestion-btn" onclick="sendQuickMessage('كيف أتحدث مع طفلي عن سلامة الجسم؟')">
+                            <button class="suggestion-btn" data-i18n="ask_suggestion1" onclick="sendQuickMessage(this)">
                                 كيف أتحدث مع طفلي عن سلامة الجسم؟
                             </button>
-                            <button class="suggestion-btn" onclick="sendQuickMessage('ما هي العلامات التي تدل على تعرض الطفل للتحرش؟')">
+                            <button class="suggestion-btn" data-i18n="ask_suggestion2" onclick="sendQuickMessage(this)">
                                 ما هي العلامات التي تدل على تعرض الطفل للتحرش؟
                             </button>
-                            <button class="suggestion-btn" onclick="sendQuickMessage('كيف أتعامل إذا أخبرني طفلي بحادثة مؤذية؟')">
+                            <button class="suggestion-btn" data-i18n="ask_suggestion3" onclick="sendQuickMessage(this)">
                                 كيف أتعامل إذا أخبرني طفلي بحادثة مؤذية؟
                             </button>
-                            <button class="suggestion-btn" onclick="sendQuickMessage('متى يجب أن أطلب المساعدة المهنية؟')">
+                            <button class="suggestion-btn" data-i18n="ask_suggestion4" onclick="sendQuickMessage(this)">
                                 متى يجب أن أطلب المساعدة المهنية؟
                             </button>
                         </div>
@@ -89,14 +96,14 @@
                     <!-- Chat Input -->
                     <div class="chat-input-container">
                         <div class="input-wrapper">
-                            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." maxlength="500">
+                            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." data-i18n-ph="ask_input_ph" maxlength="500">
                             <button id="sendButton" onclick="sendMessage()" disabled>
                                 <span class="send-icon">📤</span>
                             </button>
                         </div>
                         <div class="input-info">
                             <span class="char-count">0/500</span>
-                            <span class="typing-indicator" id="typingIndicator" style="display: none;">
+                            <span class="typing-indicator" id="typingIndicator" data-i18n="ask_typing" style="display: none;">
                                 المساعد يكتب...
                             </span>
                         </div>
@@ -109,9 +116,9 @@
                 <div class="notice-card">
                     <div class="notice-icon">⚠️</div>
                     <div class="notice-content">
-                        <h3>تنبيه مهم</h3>
-                        <p>
-                            هذا المساعد الذكي يقدم إرشادات عامة فقط ولا يغني عن الاستشارة المهنية. 
+                        <h3 data-i18n="ask_notice_title">تنبيه مهم</h3>
+                        <p data-i18n="ask_notice_text">
+                            هذا المساعد الذكي يقدم إرشادات عامة فقط ولا يغني عن الاستشارة المهنية.
                             في حالات الطوارئ أو الشك في وجود خطر فوري، يرجى الاتصال بخط المساعدة أو الجهات المختصة.
                         </p>
                     </div>
@@ -122,17 +129,22 @@
             <section class="emergency-section">
                 <div class="emergency-card">
                     <div class="emergency-icon">📞</div>
-                    <h3>للمساعدة الفورية</h3>
+                    <h3 data-i18n="emergency_help_title">للمساعدة الفورية</h3>
                     <div class="phone-number">1800 900 700</div>
-                    <p>خط مساعدة مجاني متاح 24/7 للاستشارات العاجلة</p>
+                    <p data-i18n="helpline_note_247">خط مساعدة مجاني متاح 24/7 للاستشارات العاجلة</p>
                 </div>
             </section>
 
         </main>
     </div>
+    
+     <button id="scrollTopBtn" title="العودة لأعلى الصفحة">🔺</button>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/chatbot.js"></script>
+
+
 </body>
 </html>
 
