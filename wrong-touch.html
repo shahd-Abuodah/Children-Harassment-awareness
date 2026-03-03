@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لمسة خاطئة - حدث طفلك</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/wrong-touch.css">
+    <link rel="icon" type="image/png" href="./assets/images/safety-icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <button id="scrollTopBtn" title="العودة لأعلى الصفحة">🔺</button>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="site-title">لمسة خاطئة</h1>
+                <div class="subtitle">تعليم الطفل التمييز بين اللمسات الآمنة وغير الآمنة</div>
+                <a href="index.html" class="back-button">← العودة للرئيسية</a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Gender Selection Section -->
+            <section class="gender-selection" id="genderSelection">
+                <div class="selection-card">
+                    <h2>اختر جنس الطفل</h2>
+                    <p>اختر الشخصية المناسبة لتعليم طفلك</p>
+                    
+                    <div class="gender-buttons">
+                        <button class="gender-btn" data-gender="girl" onclick="selectGender('girl')">
+                            <img src="assets/images/cartoon-girl.png" alt="بنت" class="gender-image">
+                            <span>بنت</span>
+                        </button>
+                        
+                        <button class="gender-btn" data-gender="boy" onclick="selectGender('boy')">
+                            <img src="assets/images/cartoon-boy.png" alt="ولد" class="gender-image">
+                            <span>ولد</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Body Parts Education Section -->
+            <section class="body-education" id="bodyEducation" style="display: none;">
+                <div class="education-card">
+                    <h2 id="educationTitle">تعلم عن جسمك</h2>
+                    
+                    <!-- Character Display -->
+                    <div class="character-container">
+                        <div class="character-image-wrapper">
+                            <img id="characterImage" src="" alt="شخصية الطفل" class="character-image">
+                            
+                            <!-- Interactive Body Parts -->
+                            <div class="body-part mouth-area" data-part="mouth" onclick="showBodyPartInfo('mouth')">
+                                <div class="highlight-circle"></div>
+                            </div>
+                            
+                            <div class="body-part hand-area" data-part="hand" onclick="showBodyPartInfo('hand')">
+                                <div class="highlight-circle"></div>
+                            </div>
+                            
+                            <div class="body-part private-area" data-part="private" onclick="showBodyPartInfo('private')">
+                                <div class="highlight-circle"></div>
+                            </div>
+                            
+                            <div class="body-part leg-area" data-part="leg" onclick="showBodyPartInfo('leg')">
+                                <div class="highlight-circle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Body Parts Buttons -->
+                    <div class="body-parts-grid" id="parts_section">
+
+                    <button class="body-part-btn" data-part="mouth" onclick="showBodyPartInfo('mouth')">
+                        <div class="part-icon">👄</div>
+                        <span > الفم</span>
+                    </button>
+
+                        
+                        <button class="body-part-btn" data-part="hand" onclick="showBodyPartInfo('hand')">
+                            <div class="part-icon">✋</div>
+                            <span>اليد</span>
+                        </button>
+                        
+                        <button class="body-part-btn" data-part="private" onclick="showBodyPartInfo('private')">
+                            <div class="part-icon">⚠️</div>
+                            <span>المنطقة الخاصة</span>
+                        </button>
+                        
+                        <button class="body-part-btn" data-part="leg" onclick="showBodyPartInfo('leg')">
+                            <div class="part-icon">🦵</div>
+                            <span>الرجل</span>
+                        </button>
+                    </div>
+
+                    <!-- Information Display -->
+                    <div class="info-display" id="infoDisplay">
+                        <div class="info-content">
+                            <h3 id="infoTitle">اضغط على أي جزء من الجسم لتعلم المزيد</h3>
+                            <p id="infoText">اختر جزءاً من الجسم لتتعلم عنه وعن اللمسات الآمنة وغير الآمنة.</p>
+                            <div class="safety-indicator" id="safetyIndicator"></div>
+                        </div>
+                    </div>
+
+                    <!-- Back to Selection Button -->
+                    <button class="change-gender-btn" onclick="backToGenderSelection()">
+                        تغيير الشخصية
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+     
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/wrong-touch.js"></script>
+   
+
+</body>
+</html>
+
