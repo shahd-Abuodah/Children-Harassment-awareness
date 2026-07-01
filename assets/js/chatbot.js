@@ -1,11 +1,5 @@
-// Chatbot JavaScript with Gemini API Integration
-
-// API Configuration
-// The key/model live in assets/js/config.js, which is git-ignored so the secret
-// never gets committed. Copy config.example.js -> config.js and paste your key.
-// Get a key at https://aistudio.google.com/apikey
-const API_KEY = window.GEMINI_API_KEY || "PASTE_YOUR_NEW_GEMINI_API_KEY_HERE";
-const MODEL = window.GEMINI_MODEL || "gemini-2.0-flash";
+// Chatbot JavaScript — talks to the model through window.callAI (assets/js/ai.js),
+// which handles the token locally and via the /api/ai proxy when deployed.
 
 // Chat state
 let chatHistory = [];
@@ -172,73 +166,21 @@ Question: ${userMessage}`
 
 السؤال: ${userMessage}`;
 
-        // Guard: remind the developer to configure a real API key
-        if (!API_KEY || API_KEY.indexOf("PASTE_YOUR") === 0) {
-            console.error('Gemini API key is not configured. Get one at https://aistudio.google.com/apikey');
-            throw new Error('Missing API key');
-        }
-
-        // Call Gemini API
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`,
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: contextPrompt }] }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        topK: 40,
-                        topP: 0.95,
-                        maxOutputTokens: 1024,
-                    },
-                    safetySettings: [
-                        {
-                            category: "HARM_CATEGORY_HARASSMENT",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        },
-                        {
-                            category: "HARM_CATEGORY_HATE_SPEECH",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        },
-                        {
-                            category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        },
-                        {
-                            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        }
-                    ]
-                })
-            }
+        // Ask the model (direct locally, or via the /api/ai proxy when deployed)
+        const botResponse = await window.callAI(
+            [{ role: "user", content: contextPrompt }],
+            { temperature: 0.7, max_tokens: 1024 }
         );
-        
-        hideTypingIndicator();
 
-        if (!response.ok) {
-            // Surface the real Gemini error (bad key, retired model, quota, etc.)
-            const errBody = await response.text();
-            console.error('Gemini API error', response.status, errBody);
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-            const botResponse = data.candidates[0].content.parts[0].text;
-            addMessage(botResponse, 'bot');
-            
-            // Save to chat history
-            chatHistory.push(
-                { role: 'user', message: userMessage, timestamp: new Date() },
-                { role: 'bot', message: botResponse, timestamp: new Date() }
-            );
-            saveChatHistory();
-            
-        } else {
-            throw new Error('Invalid response format');
-        }
+        hideTypingIndicator();
+        addMessage(botResponse, 'bot');
+
+        // Save to chat history
+        chatHistory.push(
+            { role: 'user', message: userMessage, timestamp: new Date() },
+            { role: 'bot', message: botResponse, timestamp: new Date() }
+        );
+        saveChatHistory();
         
     } catch (error) {
         hideTypingIndicator();

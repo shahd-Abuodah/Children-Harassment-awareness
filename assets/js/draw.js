@@ -329,9 +329,7 @@
     // Safe AI: returns ONE gentle open-ended question in the current language,
     // or null if the AI is unavailable (caller falls back to the scripted bank).
     async function askGentleAI() {
-        const key = window.GEMINI_API_KEY;
-        const model = window.GEMINI_MODEL || 'gemini-2.0-flash';
-        if (!key || key.indexOf('PASTE_YOUR') === 0) return null;
+        if (typeof window.callAI !== 'function') return null;
 
         const lang = drLang() === 'en' ? 'English' : 'Arabic';
         const transcript = convo.map(m => (m.role === 'bot' ? 'You' : 'Child') + ': ' + m.text).join('\n');
@@ -351,27 +349,13 @@ ${transcript}
 Your next gentle question:`;
 
         try {
-            const res = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: system }] }],
-                        generationConfig: { temperature: 0.8, maxOutputTokens: 60 }
-                    })
-                }
+            const out = await window.callAI(
+                [{ role: 'user', content: system }],
+                { temperature: 0.8, max_tokens: 60 }
             );
-            if (!res.ok) {
-                console.warn('Drawing AI unavailable', res.status, await res.text());
-                return null;
-            }
-            const data = await res.json();
-            const out = data && data.candidates && data.candidates[0] &&
-                data.candidates[0].content && data.candidates[0].content.parts[0].text;
             return out ? out.trim().replace(/^["']|["']$/g, '') : null;
         } catch (err) {
-            console.warn('Drawing AI error', err);
+            console.warn('Drawing AI unavailable', err);
             return null;
         }
     }
